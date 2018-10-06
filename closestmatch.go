@@ -101,7 +101,6 @@ type result struct {
 	m map[string]int
 }
 
-
 func (cm *ClosestMatch) match(searchWord string) map[string]int {
 	searchSubstrings := cm.splitWord(searchWord)
 	searchSubstringsLen := len(searchSubstrings)
@@ -259,11 +258,11 @@ func (cm *ClosestMatch) AccuracyMutatingWords() float64 {
 			ii = rand.Intn(len(testString))
 			testString = testString[:ii] + string(letters[rand.Intn(len(letters))]) + testString[ii+1:]
 		}
-		closest := cm.Closest(testString)
+		closest := cm.Closest(testString).Key
 		if closest == originalTestString {
 			percentCorrect += 1.0
 		} else {
-			//fmt.Printf("Original: %s, Mutilated: %s, Match: %s\n", originalTestString, testString, closest)
+			//fmt.Printf("Original: %s, Mutilated: %s, Match: %s\n", originalTestString, testString, closest.key)
 		}
 		numTrials += 1.0
 	}
@@ -310,7 +309,7 @@ func (cm *ClosestMatch) AccuracyMutatingLetters() float64 {
 			ii := rand.Intn(len(testString))
 			testString = testString[:ii] + string(letters[rand.Intn(len(letters))]) + testString[ii:]
 		}
-		closest := cm.Closest(testString)
+		closest := cm.Closest(testString).Key
 		if closest == originalTestString {
 			percentCorrect += 1.0
 		} else {

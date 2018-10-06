@@ -93,7 +93,7 @@ func ExampleMatchingSmall() {
 func ExampleMatchingSimple() {
 	cm := New(test.WordsToTest, []int{3})
 	for _, searchWord := range test.SearchWords {
-		fmt.Printf("'%s' matched '%s'\n", searchWord, cm.Closest(searchWord))
+		fmt.Printf("'%s' matched '%s'\n", searchWord, cm.Closest(searchWord).Key)
 	}
 	// Output:
 	// 'cervantes don quixote' matched 'don quixote by miguel de cervantes saavedra'
@@ -194,6 +194,6 @@ func TestSaveLoad(t *testing.T) {
 	answer2 := tst2.cm.Closest("war of the worlds by hg wells")
 	answer1 := tst.cm.Closest("war of the worlds by hg wells")
 	if answer1 != answer2 {
-		t.Errorf("Differing answers: '%s' '%s'", answer1, answer2)
+		t.Errorf("Differing answers: '%s' '%s'", answer1.Key, answer2.Key)
 	}
 }
